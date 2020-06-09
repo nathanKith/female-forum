@@ -1,0 +1,15 @@
+{% load static %}
+
+<div class="row">
+  <div class="col">
+    <a href="{% url 'index' %}"><h1 class="ml-5 font-krist mt-1 mb-2" style="color: black">female forum</h1></a>
+    <img src="{% static '/img/girl.svg' %}" width="500px" height="300px" class="mt-2 ml-3">
+  </div>
+  <div class="col bg-col">
+    <input type="search" class="search-border mt-2" value="search">
+    <a href="{% url 'login' %}" class="font-krist text-white float-right mt-3 mx-5">sign in</a>
+    <a href="{% url 'signup' %}" class="font-krist text-white float-right mt-3 ml-5">sign up</a>
+    <a href="{% url 'ask' %}"><h2 class="font-krist text-white flex float-right ask-margin">ask everything sweet</h2></a>
+    <h5 class="font-krist text-white flex float-right female-margin">female only</h5>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+{% load static %}
+
+<div class="col-5 pr-5">
+  <div class="container scroll-block">
+    <div class="container pink-container">
+      <dl class="font-krist">
+        <dt class="font-krist ml-3"><h5>popular tags:</h5></dt>
+        <dd>
+          {% for tag in tags %}
+          <a href="{% url 'tag' cur_tag=tag%}" class="ml-3">{{ tag }}</a>
+          {% endfor %}
+        </dd>
+      </dl>
+    </div>
+    <div class="container mt-4 pink-container">
+      <dt>
+        <dl class="font-krist">
+          <dt class="font-krist ml-3"><h5>user top:</h5></dt>
+          <dd>
+            {% for user in best_users %}
+              <a href="#" class="ml-3">{{ user }}</a>
+            {% endfor %}
+          </dd>
+        </dl>
+      </dt>
+    </div>
+  </div>
+</div>

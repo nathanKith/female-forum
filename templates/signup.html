@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block heading %}
+  <div class="row">
+    <h2 class="ml-5 mt-4 font-krist">registration</h2>
+  </div>
+{% endblock %}
+{% block content %}
+  <div class="col-7">
+    <div class="pink-container ml-5 font-krist">
+      <form class="input-style">
+        <div class="form-group row ml-3">
+          <label for="title" class="col-sm-2 col-form-label font-krist mt-3"><h5>login</h5></label>
+          <div class="col-sm-10 mt-3">
+            <input type="text" class="form-control" id="title">
+          </div>
+        </div>
+        <div class="form-group row ml-3">
+          <label for="email" class="col-sm-2 col-form-label font-krist mt-3"><h5>email</h5></label>
+          <div class="col-sm-10 mt-3">
+            <input type="text" class="form-control" id="email">
+          </div>
+        </div>
+        <div class="form-group row ml-3">
+          <label for="nickname" class="col-sm-2 col-form-label font-krist mt-3"><h5>nickname</h5></label>
+          <div class="col-sm-10 mt-3">
+            <input type="text" class="form-control" id="nickname">
+          </div>
+        </div>
+        <div class="form-group row ml-3">
+          <label for="password" class="col-sm-2 col-form-label mt-3"><h5>password</h5></label>
+          <div class="col-sm-10 mt-3">
+            <input type="password" class="form-control" id="password">
+          </div>
+        </div>
+        <div class="form-group row ml-3">
+          <label for="repeatPassword" class="col-sm-2 col-form-label mt-3"><h5>repeat password</h5></label>
+          <div class="col-sm-10 mt-3">
+            <input type="password" class="form-control mt-2" id="repeatPassword">
+          </div>
+        </div>
+        <div class="form-group row ml-3">
+          <label for="repeatPassword" class="col-sm-2 col-form-label"><h5>upload image</h5></label>
+          <div class="col-sm-10">
+            <input type="file" class="form-control-file font-krist mt-2" id="exampleFormControlFile1">
+          </div>
+        </div>
+        <div class="form-group row ml-3">
+          <label for="confrim" class="col-sm-2 col-form-label"></label>
+          <div class="col-sm-10 mt-1">
+            <button type="submit" id="confrim" class="btn btn-style btn-block text-white mb-3">sign up</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

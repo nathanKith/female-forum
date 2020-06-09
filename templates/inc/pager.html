@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="row mt-4">
+  <nav aria-label="Page navigation" class="ml-5">
+    <ul class="pagination">
+      {% if page.number != 1 %}
+        <li class="page-item page-nav-item"><a class="page-nav-item page-link" href="?page=1">1</a></li>
+      {% endif %}
+      {% if page.has_previous %}
+        <li class="page-item page-nav-item"><a class="page-nav-item page-link" href="?page={{ page.previous_page_number }}">previous</a></li>
+      {% endif %}
+      {% if page.number != page.paginator.num_pages %}
+        <li class="page-item page-nav-item"><a class="page-nav-item page-link" href="?page={{ page.number }}">{{ page.number }}</a></li>
+      {% endif %}
+      {% if page.has_next %}
+        <li class="page-item page-nav-item"><a class="page-nav-item page-link" href="?page={{ page.next_page_number }}">next</a></li>
+      {% endif %}
+      <li class="page-item page-nav-item"><a class="page-nav-item page-link" href="?page={{ page.paginator.num_pages }}">{{ page.paginator.num_pages }}</a></li>
+    </ul>
+  </nav>
+</div>
