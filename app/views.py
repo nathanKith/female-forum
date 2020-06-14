@@ -1,21 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 import random
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def pagination(object_list, request, per_page=20):
-    page = request.GET.get('page')
+    p = request.GET.get('page')
     pages = Paginator(object_list, per_page)
 
     try:
-        content = pages.page(page)
+        content = pages.page(p)
     except PageNotAnInteger:
         content = pages.page(1)
     except EmptyPage:
         content = pages.page(pages.num_pages)
 
-    return content, page
+    return content, p
 
 
 tags = [f'tag{i}' for i in range(20)]
@@ -57,7 +56,7 @@ def main(request):
 
 
 def best_questions(request):
-    content, page = pagination(sorted(questions, key=lambda x: x['likes'] - x['dislikes']), request)
+    content, page = pagination(sorted(questions, key=lambda x: x['rate'], reverse=True), request)
     return render(request, 'index.html', {
         'title': 'best questions',
         'page': page,
