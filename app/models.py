@@ -38,12 +38,12 @@ class Question(models.Model):
     date = models.DateTimeField(default=datetime.now, verbose_name=u"Время создания вопроса")
     tags = models.ManyToManyField(Tag, blank=True)
     rating = models.IntegerField(default=0, verbose_name=u"Рейтинг вопроса")
-
     objects = QuestionManager()
 
 
 class Answer(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField(verbose_name=u"Заголовок ответа")
     date = models.DateTimeField(default=datetime.now, verbose_name=u"Время создания ответа")
     rating = models.IntegerField(default=0, verbose_name=u"Рейтинг ответа")
