@@ -28,7 +28,7 @@ class QuestionManager(models.Manager):
         return self.order_by('-rating')
 
     def tag_question(self, tag):
-        return self.filter(tags=tag)
+        return self.filter(tags__name=tag)
 
 
 class Question(models.Model):
@@ -40,6 +40,17 @@ class Question(models.Model):
     rating = models.IntegerField(default=0, verbose_name=u"Рейтинг вопроса")
     objects = QuestionManager()
 
+    def answers_quantity(self):
+        return Answer.objects.answer_quantity(self)
+
+
+class AnswerManager(models.Manager):
+    def answer_quantity(self, q):
+        return self.filter(question=q).count()
+
+    def question_answers(self, q):
+        return self.filter(question=q)
+
 
 class Answer(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
@@ -49,6 +60,7 @@ class Answer(models.Model):
     rating = models.IntegerField(default=0, verbose_name=u"Рейтинг ответа")
     is_correct = models.BooleanField(default=False, verbose_name=u"Корректность вопроса")
 
+    objects = AnswerManager()
 
 class LikeQuestion(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

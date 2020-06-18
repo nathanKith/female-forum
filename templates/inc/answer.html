@@ -4,15 +4,15 @@
   <img src="{% static '/img/avatar.jpg' %}" class="mr-2 ml-3 mt-3 mt-3 rounded-circle" alt="..." width="80px" height="80px">
   <div class="media-body font-krist mt-2">
     <h5 class="mt-0 ml-3 text-white d-inline">{{ answer.author }}</h5>
-    <span>22.03.03</span>
-    <p class="text-white-50 ml-3 mr-2">{{ answer.text }}</p>
+    <span class="float-right mr-3 text-black-50">{{ answer.date }}</span>
+    <p class="text-white-50 ml-3 mr-2">{{ answer.content }}</p>
     <p class="ml-3">
       <span class="ml-3">
         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
         <label class="form-check-label text-white" for="inlineRadio1">correct</label>
       </span>
       <a href="#" class="font-krist text-white mb-3 float-right mr-4">dislikes</a>
-      <span class="font-krist mb-3 text-white float-right mx-1">({{ answer.rate }})</span>
+      <span class="font-krist mb-3 text-white float-right mx-1">({{ answer.rating }})</span>
       <a href="#" class="font-krist text-white ml-5 pl-5 mb-3 float-right">likes</a>
     </p>
   </div>

@@ -1,6 +1,13 @@
 from django.shortcuts import render
 import random
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from app.models import Question, Answer, Profile, Tag, LikeAnswer, LikeQuestion
+
+
+tags_and_users = {
+    'tags': Tag.objects.values_list('name', flat=True),
+    'best_users': [i.user.username for i in Profile.objects.all()],
+}
 
 
 def pagination(object_list, request, per_page=20):
@@ -17,93 +24,57 @@ def pagination(object_list, request, per_page=20):
     return content, p
 
 
-tags = [f'tag{i}' for i in range(20)]
-best_users = [f'user{i}' for i in range(20)]
-answers = [
-    {
-        'id': i,
-        'text': f'text#{i}',
-        'author': f'author#{i}',
-        'rate': random.randint(0, 20) - random.randint(0, 20)
-    }
-    for i in range(1, random.randint(10, 30))
-]
-
-questions = [
-    {
-        'id': i,
-        'title': f'question #{i}',
-        'text': f'text #{i}',
-        'tags': random.choices(tags, k=random.randint(1, 3)),
-        'author': f'author#{i}',
-        'answers': answers,
-        'num_answers': len(answers),
-        'rate': random.randint(0, 20) - random.randint(0, 20)
-    }
-    for i in range(200)
-]
-
-
 def main(request):
-    content, page = pagination(questions, request)
+    content, page = pagination(Question.objects.hot(), request)
     return render(request, 'index.html', {
         'title': 'new questions',
         'page': page,
         'questions': content,
-        'tags': tags,
-        'best_users': best_users,
+        **tags_and_users,
     })
 
 
 def best_questions(request):
-    content, page = pagination(sorted(questions, key=lambda x: x['rate'], reverse=True), request)
+    content, page = pagination(Question.objects.best(), request)
     return render(request, 'index.html', {
         'title': 'best questions',
         'page': page,
         'questions': content,
-        'tags': tags,
-        'best_users': best_users,
+        **tags_and_users,
     })
 
 
 def tag_questions(request, cur_tag):
-    content, page = pagination(list(filter(lambda x: cur_tag in x['tags'], questions)), request)
+    content, page = pagination(Question.objects.tag_question(cur_tag), request)
     return render(request, 'index.html', {
         'title': f'question about {cur_tag}',
         'page': page,
         'questions': content,
-        'tags': tags,
-        'best_users': best_users,
+        **tags_and_users,
     })
 
 
 def question(request, qid):
-    content, page = pagination(questions[qid]['answers'], request, per_page=5)
+    content, page = pagination(
+        Answer.objects.question_answers(Question.objects.get(pk=qid)),
+        request,
+        per_page=5,
+    )
     return render(request, 'question.html', {
-        'tags': tags,
-        'best_users': best_users,
-        'question': questions[qid],
+        'question': Question.objects.get(pk=qid),
         'answers': content,
-        'page': page
+        'page': page,
+        **tags_and_users,
     })
 
 
 def login(request):
-    return render(request, 'signin.html', {
-        'tags': tags,
-        'best_users': best_users,
-    })
+    return render(request, 'signin.html', tags_and_users)
 
 
 def signup(request):
-    return render(request, 'signup.html', {
-        'tags': tags,
-        'best_users': best_users,
-    })
+    return render(request, 'signup.html', tags_and_users)
 
 
 def ask(request):
-    return render(request, 'ask.html', {
-        'tags': tags,
-        'best_users': best_users,
-    })
+    return render(request, 'ask.html', tags_and_users)
