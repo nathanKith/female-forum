@@ -1,7 +1,7 @@
 {% load static %}
 
 <li class="media ml-4 ask-style mb-4">
-  <img src="{% static 'img/avatar.jpg' %}" class="mr-2 ml-3 mt-3 rounded-circle" alt="..." width="80px" height="80px">
+  <img src="{% static 'img/../../uploads/avatars/avatar.jpg' %}" class="mr-2 ml-3 mt-3 rounded-circle" alt="..." width="80px" height="80px">
   <div class="media-body font-krist mt-2">
     <h4 class="mt-0 ml-3 d-inline"><a href="{% url 'question' qid=question.id %}" class="text-white">{{ question.title }}</a></h4>
     <span class="text-black-50 mt-1 mr-3 float-right">{{ question.date }}</span>

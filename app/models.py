@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 from datetime import datetime
+import os
 
 
 class Tag(models.Model):
@@ -12,9 +13,13 @@ class Tag(models.Model):
         return self.name
 
 
+def avatar_upload_to(instance, filename):
+    return os.path.join('uploads', instance.user.username + os.path.splitext(filename)[1])
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    avatar = models.ImageField(upload_to='uploads/', default='static/img/avatar.jpg')
+    avatar = models.ImageField(upload_to='avatars', default='uploads/avatars/avatar.jpg')
 
     def __str__(self):
         return self.user.username
@@ -61,6 +66,7 @@ class Answer(models.Model):
     is_correct = models.BooleanField(default=False, verbose_name=u"Корректность вопроса")
 
     objects = AnswerManager()
+
 
 class LikeQuestion(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
