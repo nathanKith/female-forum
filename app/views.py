@@ -1,8 +1,8 @@
 from django.contrib import auth
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from app.models import Question, Answer, Profile, Tag, LikeAnswer, LikeQuestion
-from app.forms import LoginForm, UserForm, ProfileForm
+from app.forms import LoginForm, UserForm, ProfileForm, QuestionForm, AnswerForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 
@@ -59,6 +59,10 @@ def tag_questions(request, cur_tag):
 
 def question(request, qid):
     q = get_object_or_404(Question, pk=qid)
+    if request.method == 'POST':
+        form = AnswerForm(request.user.profile, q, data=request.POST)
+        if form.is_valid():
+            form.save()
     content, page = pagination(
         Answer.objects.question_answers(q),
         request,
@@ -74,7 +78,7 @@ def question(request, qid):
 
 def login(request):
     if request.method == 'POST':
-        prev = request.GET.get('next', '')
+        prev = request.POST.get('next', '/')
         form = LoginForm(data=request.POST)
         if form.is_valid():
             user = auth.authenticate(request, **form.cleaned_data)
@@ -133,6 +137,11 @@ def signup(request):
 
 @login_required
 def ask(request):
+    if request.method == 'POST':
+        form = QuestionForm(request.user.profile, data=request.POST)
+        if form.is_valid():
+            q = form.save()
+            return redirect(reverse('question', kwargs={'qid': q.id}))
     return render(request, 'ask.html', tags_and_users)
 
 

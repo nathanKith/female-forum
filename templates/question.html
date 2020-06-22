@@ -21,9 +21,10 @@
       </div>
     </div>
     <div class="pink-container ml-5">
-      <h2 class="font-krist my-2" style="background-color: white">your answer:</h2>
-      <form class="ml-5 mr-4">
-        <p><textarea class="input-style mt-3 font-krist" rows="7" cols="67" name="text" placeholder="Write your answer here"></textarea></p>
+      <h2 class="font-krist my-2" style="background-color: white"><label for="content">your answer:</label></h2>
+      <form class="ml-5 mr-4" method="POST">
+        {% csrf_token %}
+        <p><textarea class="input-style mt-3 font-krist" rows="7" cols="67" name="content" id="content" placeholder="Write your answer here"></textarea></p>
         <p><input type="submit" value="answer" class="btn font-krist text-white mb-3 btn-style"/></p>
       </form>
     </div>

@@ -46,7 +46,6 @@ class Command(BaseCommand):
             ]
             for tag in tags:
                 question.tags.add(tag)
-            # question.save()
         return True
 
     def fill_answers(self, cnt):
