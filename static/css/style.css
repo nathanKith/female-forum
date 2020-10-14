@@ -1,0 +1,78 @@
+.bg-col {
+    background-image: url("../img/backgr.png");
+    background-size: cover;
+}
+
+.font-krist {
+    font-family: ITCKRIST;
+}
+
+body {
+    zoom: 150%;
+}
+
+@font-face {
+    font-family: ITCKRIST;
+    src: url("../fonts/ITCKRIST.TTF");
+}
+
+.input-style {
+    width: 95%;
+    resize: none;
+}
+
+.ask-style {
+    background-color: #8e82bf;
+    border-radius: 20px;
+}
+
+.avatar-style {
+    margin-left: 120px;
+}
+
+.btn-style {
+    background-color: #8e82bf;
+}
+
+.search-border {
+    border-bottom-color: #f8bebe;
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    width: 25%;
+    color: #f8bebe;
+    font-family: ITCKRIST;
+}
+
+.ask-margin {
+    margin-top: 20%;
+    margin-right: 15%;
+}
+
+.female-margin {
+    margin-right: 30%;
+}
+
+.ask-margin-login {
+    margin-top: 15%;
+    margin-right: 15%;
+}
+
+.pink-container {
+    background-color: #f8bebe;
+}
+
+.scroll-block {
+    position: sticky;
+    top: 20px;
+}
+
+.page-nav-item {
+    color: black;
+    font-family: ITCKRIST;
+    border: white;
+}
+
+.footer-row {
+    background-color: #f8bebe;
+}

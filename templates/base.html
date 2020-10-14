@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{% static 'css/bootstrap.css'  %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-grid.css' %}">
+  <link rel="stylesheet" href="{% static 'css/bootstrap-reboot.css' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+</head>
+<body>
+{% include 'inc/header.html' %}
+{% block heading %} {% endblock %}
+<div class="row">
+  {% block content %} {% endblock %}
+  {% include 'inc/rightmenu.html' %}
+</div>
+{% block paginate %} {% endblock %}
+<div class="row footer-row">
+  <h4 class="ml-5 font-krist my-auto">female forum</h4>
+  <h6 class="mx-auto font-krist my-auto">copyright</h6>
+  <a href="#"><img src="{% static '/img/telegram.svg' %}" class="mr-4 my-2" width="32px"></a>
+  <a href="#"><img src="{% static '/img/instagram.svg' %}" class="mr-5 my-2"></a>
+</div>
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{% load static %}
+
+<li class="media ml-4 ask-style mb-4">
+  <img src="{% static 'img/../../uploads/avatars/avatar.jpg' %}" class="mr-2 ml-3 mt-3 rounded-circle" alt="..." width="80px" height="80px">
+  <div class="media-body font-krist mt-2">
+    <h4 class="mt-0 ml-3 d-inline"><a href="{% url 'question' qid=question.id %}" class="text-white">{{ question.title }}</a></h4>
+    <span class="text-black-50 mt-1 mr-3 float-right">{{ question.date }}</span>
+    <span class="mt-1 ml-0 text-white float-right mr-3 text-black-50">({{ question.author }})</span>
+    <p class="text-white-50 ml-1 pl-5 mr-2">{{ question.content }}</p>
+    <span class="text-white float-left mb-3 ml-3"><a href="{% url 'question' qid=question.id %}" class="text-white">answers({{ question.answers_quantity }})</a></span>
+    <span class="font-krist text-white float-left ml-4 mb-3">tags:</span>
+    {% for tag in question.tags.all %}
+      <a href="{% url 'tag' cur_tag=tag %}" class="ml-1 font-krist text-white float-left">{{ tag }}</a>
+    {% endfor %}
+    <a href="#" class="font-krist text-white mb-3 float-right mr-4">dislikes</a>
+    <span class="font-krist mb-3 text-white float-right mx-1">({{ question.rating }})</span>
+    <a href="#" class="font-krist text-white ml-5 pl-5 mb-3 float-right">likes</a>
+  </div>
+</li>
